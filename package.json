@@ -1,0 +1,23 @@
+{
+  "name": "magnum-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anyweez/MagnumAPI.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anyweez/MagnumAPI/issues"
+  },
+  "homepage": "https://github.com/anyweez/MagnumAPI#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-browserify": "^0.5.1"
+  }
+}
