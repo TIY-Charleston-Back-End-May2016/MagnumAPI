@@ -2,6 +2,8 @@ package com.theironyard.entities;
 
 import javax.persistence.*;
 
+import static com.theironyard.controllers.MagnumApiController.PHOTOS_DIR;
+
 /**
  * Created by zach on 7/7/16.
  */
@@ -39,7 +41,7 @@ public class TomALike {
     }
 
     public String getFilename() {
-        return filename;
+        return PHOTOS_DIR + "/" + filename;
     }
 
     public void setFilename(String filename) {
