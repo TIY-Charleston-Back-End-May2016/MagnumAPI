@@ -88,6 +88,9 @@ public class MagnumApiController {
             throw new Exception("Can't find that tom!");
         }
 
+        tom.setVotes(tom.getVotes() + (fav.isLooksLikeTom() ? 1 : -1));
+        toms.save(tom);
+
         fav.setTomALike(tom);
         fav.setUser(user);
         favs.save(fav);
@@ -97,12 +100,12 @@ public class MagnumApiController {
     public void addUser(HttpSession session, @RequestBody User user) throws Exception {
         User userFromDb = users.findByName(user.getName());
         if (userFromDb == null) {
-            user.setPassword(PasswordStorage.createHash(user.getPassword()));
+            //user.setPassword(PasswordStorage.createHash(user.getPassword()));
             users.save(user);
         }
-        else if (!PasswordStorage.verifyPassword(user.getPassword(), userFromDb.getPassword())) {
-            throw new Exception("Incorrect password");
-        }
+//        else if (!PasswordStorage.verifyPassword(user.getPassword(), userFromDb.getPassword())) {
+//            throw new Exception("Incorrect password");
+//        }
         session.setAttribute("userName", user.getName());
     }
 }
