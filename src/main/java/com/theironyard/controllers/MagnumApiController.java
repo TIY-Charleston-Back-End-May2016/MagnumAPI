@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -49,7 +50,7 @@ public class MagnumApiController {
     }
 
     @RequestMapping(path = "/tomalikes", method = RequestMethod.POST)
-    public void addTom(HttpSession session, MultipartFile photo, String comment) throws Exception {
+    public void addTom(HttpSession session, MultipartFile photo, String comment, HttpServletResponse response) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -69,6 +70,8 @@ public class MagnumApiController {
 
         TomALike tom = new TomALike(photoFile.getName(), comment, user);
         toms.save(tom);
+
+        response.sendRedirect("/#/tomalikes");
     }
 
     @RequestMapping(path = "/favs", method = RequestMethod.POST)
@@ -100,12 +103,12 @@ public class MagnumApiController {
     public void addUser(HttpSession session, @RequestBody User user) throws Exception {
         User userFromDb = users.findByName(user.getName());
         if (userFromDb == null) {
-            //user.setPassword(PasswordStorage.createHash(user.getPassword()));
+            user.setPassword(PasswordStorage.createHash(user.getPassword()));
             users.save(user);
         }
-//        else if (!PasswordStorage.verifyPassword(user.getPassword(), userFromDb.getPassword())) {
-//            throw new Exception("Incorrect password");
-//        }
-        session.setAttribute("userName", user.getName());
+        else if (!PasswordStorage.verifyPassword(user.getPassword(), userFromDb.getPassword())) {
+            throw new Exception("Incorrect password");
+        }
+        session.setAttribute("username", user.getName());
     }
 }
