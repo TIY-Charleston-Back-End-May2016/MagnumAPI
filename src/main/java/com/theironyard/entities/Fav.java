@@ -21,6 +21,9 @@ public class Fav {
     @ManyToOne
     TomALike tomALike;
 
+    @Transient
+    Integer tomId;
+
     public Fav() {
     }
 
@@ -60,5 +63,13 @@ public class Fav {
 
     public void setTomALike(TomALike tomALike) {
         this.tomALike = tomALike;
+    }
+
+    public Integer getTomId() {
+        return tomId;
+    }
+
+    public void setTomId(Integer tomId) {
+        this.tomId = tomId;
     }
 }
