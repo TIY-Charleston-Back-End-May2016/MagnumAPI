@@ -20,6 +20,9 @@ public class TomALike {
     @Column(nullable = false)
     String comment;
 
+    @Column(nullable = false)
+    int votes;
+
     @ManyToOne
     User user;
 
@@ -62,5 +65,13 @@ public class TomALike {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
     }
 }

@@ -18,7 +18,6 @@ public class User {
     String name;
 
     @Column(nullable = false)
-    @JsonIgnore
     String password;
 
     public User() {
